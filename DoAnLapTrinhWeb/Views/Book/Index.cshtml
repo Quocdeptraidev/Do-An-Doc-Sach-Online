@@ -1,0 +1,33 @@
+﻿@model IEnumerable<DoAnLapTrinhWeb.Models.tbSach>
+<h2>Book</h2>
+<h6><a asp-action="Add">Create</a></h6>
+<table class="table">
+
+    <thead>
+        <tr>
+            <th>NameBook</th>
+            <th>The Loai</th>
+            <th>Ten Tac Gia</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var book in Model)
+        {
+            <tr>
+                <td>@book.tenSach</td>
+                <td>@book.TheLoai.tenTheLoai</td>
+                <td>@book.TacGia.TenTacGia</td>
+                <td>
+
+                    <a asp-action="Display" asp-route-id="@book.sachId">Doc</a> |
+
+                    <a asp-action="Update" asp-route-id="@book.sachId">Edit</a> |
+
+                    <a asp-action="Delete" asp-route-id="@book.sachId">Delete</a>
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

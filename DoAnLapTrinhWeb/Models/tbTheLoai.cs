@@ -5,7 +5,7 @@ namespace DoAnLapTrinhWeb.Models
     public class tbTheLoai
     {
         [Key]
-        public int maTheLoai { get; set; }
+        public int TheLoaiId { get; set; }
 
         public string tenTheLoai { get; set;  }
 

@@ -148,14 +148,14 @@ namespace DoAnLapTrinhWeb.Migrations
                     b.Property<int?>("tbSachsachId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("tbTheLoaimaTheLoai")
+                    b.Property<int?>("tbTheLoaiTheLoaiId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("tbSachsachId");
 
-                    b.HasIndex("tbTheLoaimaTheLoai");
+                    b.HasIndex("tbTheLoaiTheLoaiId");
 
                     b.ToTable("tbChiTietTheLoai");
                 });
@@ -245,18 +245,17 @@ namespace DoAnLapTrinhWeb.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("sachId"));
 
+                    b.Property<int>("TacGiaId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TheLoaiId")
+                        .HasColumnType("int");
+
                     b.Property<string>("fileUrl")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("imageUrl")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("tacGiaId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("tbTacGiaTacGiaId")
-                        .HasColumnType("int");
 
                     b.Property<string>("tenSach")
                         .IsRequired()
@@ -265,7 +264,9 @@ namespace DoAnLapTrinhWeb.Migrations
 
                     b.HasKey("sachId");
 
-                    b.HasIndex("tbTacGiaTacGiaId");
+                    b.HasIndex("TacGiaId");
+
+                    b.HasIndex("TheLoaiId");
 
                     b.ToTable("tbSach");
                 });
@@ -290,17 +291,17 @@ namespace DoAnLapTrinhWeb.Migrations
 
             modelBuilder.Entity("DoAnLapTrinhWeb.Models.tbTheLoai", b =>
                 {
-                    b.Property<int>("maTheLoai")
+                    b.Property<int>("TheLoaiId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("maTheLoai"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TheLoaiId"));
 
                     b.Property<string>("tenTheLoai")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("maTheLoai");
+                    b.HasKey("TheLoaiId");
 
                     b.ToTable("tbTheLoai");
                 });
@@ -473,7 +474,7 @@ namespace DoAnLapTrinhWeb.Migrations
 
                     b.HasOne("DoAnLapTrinhWeb.Models.tbTheLoai", "tbTheLoai")
                         .WithMany("chiTietTheLoais")
-                        .HasForeignKey("tbTheLoaimaTheLoai");
+                        .HasForeignKey("tbTheLoaiTheLoaiId");
 
                     b.Navigation("tbSach");
 
@@ -520,11 +521,21 @@ namespace DoAnLapTrinhWeb.Migrations
 
             modelBuilder.Entity("DoAnLapTrinhWeb.Models.tbSach", b =>
                 {
-                    b.HasOne("DoAnLapTrinhWeb.Models.tbTacGia", "tbTacGia")
+                    b.HasOne("DoAnLapTrinhWeb.Models.tbTacGia", "TacGia")
                         .WithMany("Saches")
-                        .HasForeignKey("tbTacGiaTacGiaId");
+                        .HasForeignKey("TacGiaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Navigation("tbTacGia");
+                    b.HasOne("DoAnLapTrinhWeb.Models.tbTheLoai", "TheLoai")
+                        .WithMany()
+                        .HasForeignKey("TheLoaiId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("TacGia");
+
+                    b.Navigation("TheLoai");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

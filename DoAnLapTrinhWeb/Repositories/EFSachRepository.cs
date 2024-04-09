@@ -12,8 +12,8 @@ namespace DoAnLapTrinhWeb.Repositories
         }
         public async Task<IEnumerable<tbSach>> GetAllAsync()
         {
-            // return await _context.Products.ToListAsync();
-            return await _context.tbSach.Include(p => p.chiTietTheLoais) // Include thông tin về category
+            // return await _context.Products.ToListAsync();.
+            return await _context.tbSach.Include(p => p.chiTietTheLoais).Include(p => p.TacGia).Include(p=> p.TheLoai) // Include thông tin về category
             .ToListAsync();
         }
         public async Task<tbSach> GetByIdAsync(int id)

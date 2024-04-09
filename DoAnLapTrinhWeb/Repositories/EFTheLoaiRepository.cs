@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using DoAnLapTrinhWeb.Models;
-
+using System.Collections.Generic; // Thêm using này để sử dụng IEnumerable
+using System.Collections;
 namespace DoAnLapTrinhWeb.Repositories
 {
     public class EFTheLoaiRepository : ITheLoaiRepository
@@ -21,7 +22,7 @@ namespace DoAnLapTrinhWeb.Repositories
         {
             // return await _context.Products.FindAsync(id);
             // lấy thông tin kèm theo category
-            return await _context.tbTheLoai.Include(p => p.chiTietTheLoais).FirstOrDefaultAsync(p => p.maTheLoai == id);
+            return await _context.tbTheLoai.Include(p => p.chiTietTheLoais).FirstOrDefaultAsync(p => p.TheLoaiId == id);
         }
         public async Task AddAsync(tbTheLoai theLoai)
         {
@@ -41,4 +42,3 @@ namespace DoAnLapTrinhWeb.Repositories
         }
     }
 }
-

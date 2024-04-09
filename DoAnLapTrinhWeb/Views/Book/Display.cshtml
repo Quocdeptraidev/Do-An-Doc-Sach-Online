@@ -1,0 +1,32 @@
+﻿@model DoAnLapTrinhWeb.Models.tbSach
+@{
+    ViewData["Title"] = "Book Details";
+}
+
+<h2>@Model.tenSach</h2>
+<div>
+    @if (!string.IsNullOrEmpty(Model.imageUrl))
+    {
+        <img src="@Model.imageUrl" alt="Product Image" style="max-width:200px;" />
+    }
+    @if (!string.IsNullOrEmpty(Model.fileUrl))
+    {
+        <img src="@Model.fileUrl" alt="Doc sach" style="max-width:200px;" />
+    }
+</div>
+
+<div>
+    <h3>Description:</h3>
+</div>
+
+<div>
+    <h3>Author:</h3>
+@*     <p>@Model.TacGia.TenTacGia</p> *@
+</div>
+
+<div>
+    <h3>Category:</h3>
+@*     <p>@Model.TheLoai.tenTheLoai</p> *@
+</div>
+<a asp-action="Index">Doc Sach</a>
+<a asp-action="Index">Back to List</a>
